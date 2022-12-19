@@ -10,24 +10,26 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private Order order;
+
+    @Column(nullable = false)
     private String name;
 
-    @Column(name = "quantity")
+    @Column(nullable = false)
     private Integer quantity;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "neworder_id", nullable = false)
-    private NewOrder newOrder;
+    @Column(nullable = false)
+    private Integer price;
 
     public Item() {
     }
 
-    public Item(String name, Integer quantity, NewOrder newOrder, Long id) {
-        this.newOrder = newOrder;
-        this.id = id;
+    public Item(String name, Integer quantity, Integer price) {
         this.name = name;
         this.quantity = quantity;
+        this.price = price;
     }
 
     public Long getId() {
@@ -38,6 +40,14 @@ public class Item {
         this.id = id;
     }
 
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
     public String getName() {
         return name;
     }
@@ -46,7 +56,19 @@ public class Item {
         this.name = name;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 }

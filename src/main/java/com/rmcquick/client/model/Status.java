@@ -10,23 +10,22 @@ public class Status {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "accepted")
+    @Column(nullable = false)
     private Integer accepted;
 
-    @Column(name = "notaccepted")
-    private Integer notaccepted;
+    @Column(nullable = false)
+    private Integer notAccepted;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "new_order_id", referencedColumnName = "id")
-    private NewOrder newOrder;
+    @OneToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
-    public Status() {}
+    public Status() {
+    }
 
-    public Status(Integer accepted, Integer notaccepted, NewOrder newOrder, Long id) {
-        this.newOrder = newOrder;
-        this.id = id;
+    public Status(Integer accepted, Integer notAccepted) {
         this.accepted = accepted;
-        this.notaccepted = notaccepted;
+        this.notAccepted = notAccepted;
     }
 
     public Long getId() {
@@ -37,27 +36,27 @@ public class Status {
         this.id = id;
     }
 
-    public int getAccepted() {
+    public Integer getAccepted() {
         return accepted;
     }
 
-    public void setAccepted(int accepted) {
+    public void setAccepted(Integer accepted) {
         this.accepted = accepted;
     }
 
-    public int getNotaccepted() {
-        return notaccepted;
+    public Integer getNotAccepted() {
+        return notAccepted;
     }
 
-    public void setNotaccepted(int notaccepted) {
-        this.notaccepted = notaccepted;
+    public void setNotAccepted(Integer notAccepted) {
+        this.notAccepted = notAccepted;
     }
 
-    public NewOrder getNewOrder() {
-        return newOrder;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setNewOrder(NewOrder newOrder) {
-        this.newOrder = newOrder;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }
